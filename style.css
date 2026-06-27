@@ -1,0 +1,138 @@
+/* --- High-End Design Tokens --- */
+:root {
+    --bg-ink: #000000;
+    --card-surface: #0a0a0a;
+    --card-border: #1a1a1a;
+    --text-high: #f5f5f5;
+    --text-mid: #a1a1aa;
+    --text-low: #52525b;
+    --accent-blue: #0070f3;
+    --shimmer-bg: linear-gradient(90deg, #121212 25%, #1d1d1d 50%, #121212 75%);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    background-color: var(--bg-ink);
+    color: var(--text-high);
+    font-family: 'Inter', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    overflow-x: hidden;
+}
+
+/* --- Premium Backgrounds --- */
+.mesh-gradient {
+    position: fixed;
+    top: -50%; left: -50%; width: 200%; height: 200%;
+    background: radial-gradient(circle at center, #111 0%, transparent 40%),
+                radial-gradient(circle at 20% 30%, #0a0a0a 0%, transparent 30%);
+    z-index: -2;
+    animation: rotateMesh 40s linear infinite;
+}
+@keyframes rotateMesh { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+.grid-overlay {
+    position: fixed;
+    inset: 0;
+    background-image: linear-gradient(var(--card-border) 1px, transparent 1px), 
+                      linear-gradient(90deg, var(--card-border) 1px, transparent 1px);
+    background-size: 50px 50px;
+    opacity: 0.15;
+    z-index: -1;
+}
+
+.container { width: 100%; max-width: 800px; padding: 2rem 1.5rem; }
+
+/* --- Header & Badge --- */
+.app-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 3rem; }
+.brand { font-size: 1.4rem; font-weight: 700; display: flex; align-items: center; gap: 0.8rem; letter-spacing: -1px; }
+.brand span span { color: var(--accent-blue); }
+.status-badge { font-size: 0.75rem; background: rgba(34, 197, 94, 0.1); color: #22c55e; padding: 4px 12px; border-radius: 100px; border: 1px solid rgba(34, 197, 94, 0.2); }
+
+/* --- Search Engine --- */
+.search-engine {
+    background: var(--card-surface);
+    border: 1px solid var(--card-border);
+    border-radius: 14px;
+    padding: 8px 8px 8px 24px;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.search-engine:focus-within { border-color: var(--accent-blue); box-shadow: 0 0 20px rgba(0, 112, 243, 0.15); }
+.input-wrapper { flex: 1; display: flex; align-items: center; gap: 1rem; }
+.input-wrapper i { color: var(--text-low); }
+.search-engine input { background: none; border: none; color: #fff; font-size: 1rem; outline: none; width: 100%; }
+.search-btn { background: #fff; color: #000; border: none; padding: 12px 24px; border-radius: 10px; font-weight: 600; cursor: pointer; transition: opacity 0.2s; }
+.search-btn:hover { opacity: 0.9; }
+.search-error { color: #ff4d4d; font-size: 0.85rem; font-weight: 600; display: none; margin-right: 1rem; }
+
+/* --- Bento Card & Shimmer --- */
+.bento-card {
+    background: var(--card-surface);
+    border: 1px solid var(--card-border);
+    border-radius: 20px;
+    padding: 2.5rem;
+    backdrop-filter: blur(10px);
+    animation: fadeIn 0.8s ease forwards;
+}
+@keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+.hidden { display: none; }
+
+/* Shimmer Loader */
+.shimmer { 
+    background: var(--shimmer-bg); 
+    background-size: 200% 100%; 
+    animation: shimmerAnim 1.5s infinite linear; 
+    border-radius: 8px;
+}
+@keyframes shimmerAnim { to { background-position: -200% 0; } }
+.skel-top { display: flex; gap: 1.5rem; }
+.skel-avatar { width: 100px; height: 100px; border-radius: 50%; }
+.skel-text-group { display: flex; flex-direction: column; gap: 12px; justify-content: center; }
+.skel-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+.skel-box { height: 90px; }
+
+/* Real Profile Elements */
+.card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 2rem; }
+.user-main { display: flex; gap: 1.5rem; align-items: center; }
+.user-photo { width: 100px; height: 100px; border-radius: 50%; border: 2px solid var(--card-border); }
+.user-naming h2 { font-size: 1.8rem; font-weight: 700; letter-spacing: -1px; }
+.handle { color: var(--accent-blue); text-decoration: none; font-size: 1rem; }
+.joined-tag { color: var(--text-low); font-size: 0.85rem; padding-top: 10px; font-family: 'Space Mono'; }
+.user-bio { color: var(--text-mid); line-height: 1.7; margin-bottom: 2.5rem; font-size: 1.05rem; }
+
+/* Bento Grid Stats */
+.bento-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 2.5rem; }
+.bento-item { background: #000; border: 1px solid var(--card-border); border-radius: 16px; padding: 1.5rem; text-align: center; transition: border-color 0.3s; }
+.bento-item:hover { border-color: var(--text-low); }
+.bento-item .label { display: block; font-size: 0.8rem; color: var(--text-low); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px; }
+.bento-item .value { font-size: 1.8rem; font-weight: 700; font-family: 'Space Mono'; }
+
+/* Footer Links */
+.footer-links { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+.link-cell { display: flex; align-items: center; gap: 0.8rem; color: var(--text-mid); font-size: 0.95rem; }
+.link-cell i { color: var(--text-low); width: 18px; }
+.link-cell a { color: var(--text-mid); text-decoration: none; transition: color 0.2s; }
+.link-cell a:hover { color: #fff; }
+.link-cell.unavailable { opacity: 0.3; }
+
+/* --- Pro Footer --- */
+.pro-footer { margin-top: 5rem; border-top: 1px solid var(--card-border); padding-top: 2rem; }
+.footer-content { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; }
+.creator-info .badge { font-size: 0.65rem; color: var(--accent-blue); background: rgba(0, 112, 243, 0.1); padding: 2px 8px; border-radius: 4px; border: 1px solid rgba(0, 112, 243, 0.2); }
+.creator-info p { margin-top: 8px; color: var(--text-mid); }
+.wa-contact { background: #fff; color: #000; padding: 10px 20px; border-radius: 100px; text-decoration: none; font-weight: 600; font-size: 0.9rem; display: flex; align-items: center; gap: 8px; transition: 0.3s; }
+.wa-contact:hover { transform: scale(1.05); box-shadow: 0 0 20px rgba(255, 255, 255, 0.1); }
+.copyright { text-align: center; font-size: 0.75rem; color: var(--text-low); }
+
+@media (max-width: 600px) {
+    .card-header, .footer-content { flex-direction: column; align-items: center; text-align: center; gap: 1.5rem; }
+    .bento-grid, .footer-links { grid-template-columns: 1fr; }
+    .search-engine { padding-left: 12px; }
+    .search-btn { font-size: 0.8rem; padding: 10px 16px; }
+}

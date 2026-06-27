@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevFinder Pro | Engineered by Amr Othman</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Space+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="mesh-gradient"></div>
+    <div class="grid-overlay"></div>
+
+    <div class="container">
+        <header class="app-header">
+            <div class="brand">
+                <i class="fa-brands fa-github-alt"></i>
+                <span>DevFinder<span>.pro</span></span>
+            </div>
+            <div id="live-status" class="status-badge">System Live</div>
+        </header>
+
+        <main>
+            <form id="search-form" class="search-engine">
+                <div class="input-wrapper">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" id="search-input" placeholder="Enter GitHub username..." required autocomplete="off">
+                </div>
+                <button type="submit" class="search-btn">Fetch Data</button>
+                <div id="error-msg" class="search-error">Not found</div>
+            </form>
+
+            <div id="skeleton" class="bento-card hidden">
+                <div class="skel-top">
+                    <div class="skel-avatar shimmer"></div>
+                    <div class="skel-text-group">
+                        <div class="skel-bar shimmer" style="width: 140px; height: 24px;"></div>
+                        <div class="skel-bar shimmer" style="width: 90px; height: 14px;"></div>
+                    </div>
+                </div>
+                <div class="skel-body shimmer" style="width: 100%; height: 60px; margin: 25px 0;"></div>
+                <div class="skel-stats">
+                    <div class="skel-box shimmer"></div>
+                    <div class="skel-box shimmer"></div>
+                    <div class="skel-box shimmer"></div>
+                </div>
+            </div>
+
+            <div id="profile-card" class="bento-card hidden">
+                <div class="card-header">
+                    <div class="user-main">
+                        <img id="avatar" src="" alt="Avatar" class="user-photo">
+                        <div class="user-naming">
+                            <h2 id="name">Name</h2>
+                            <a href="#" id="username" class="handle" target="_blank">@username</a>
+                        </div>
+                    </div>
+                    <div id="date" class="joined-tag">Joined Date</div>
+                </div>
+
+                <p id="bio" class="user-bio">No bio available for this developer.</p>
+
+                <div class="bento-grid">
+                    <div class="bento-item">
+                        <span class="label">Repositories</span>
+                        <span id="repos" class="value">0</span>
+                    </div>
+                    <div class="bento-item">
+                        <span class="label">Followers</span>
+                        <span id="followers" class="value">0</span>
+                    </div>
+                    <div class="bento-item">
+                        <span class="label">Following</span>
+                        <span id="following" class="value">0</span>
+                    </div>
+                </div>
+
+                <div class="footer-links">
+                    <div class="link-cell" id="location-box"><i class="fa-solid fa-map-pin"></i> <span id="location">-</span></div>
+                    <div class="link-cell" id="twitter-box"><i class="fa-brands fa-x-twitter"></i> <span id="twitter">-</span></div>
+                    <div class="link-cell" id="blog-box"><i class="fa-solid fa-paperclip"></i> <a href="#" id="blog" target="_blank">-</a></div>
+                    <div class="link-cell" id="company-box"><i class="fa-solid fa-briefcase"></i> <span id="company">-</span></div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="pro-footer">
+            <div class="footer-content">
+                <div class="creator-info">
+                    <span class="badge">Verified Architect</span>
+                    <p>Engineered with Precision by <strong>Amr Othman</strong></p>
+                </div>
+                <div class="action-links">
+                    <a href="https://wa.me/201009694831" class="wa-contact" target="_blank">
+                        <i class="fa-brands fa-whatsapp"></i> Hire the Expert
+                    </a>
+                </div>
+            </div>
+            <div class="copyright">© 2024 Developer Ecosystem. All rights reserved.</div>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

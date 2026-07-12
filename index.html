@@ -1,12 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DevFinder Pro | Engineered by Amr Othman</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Space+Mono&display=swap" rel="stylesheet">
+    <title>DevFinder Pro | OTHMAN VENTURES</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;700;900&family=Inter:wght@400;600;700;900&family=Space+Mono&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
     <div class="mesh-gradient"></div>
@@ -18,18 +19,37 @@
                 <i class="fa-brands fa-github-alt"></i>
                 <span>DevFinder<span>.pro</span></span>
             </div>
-            <div id="live-status" class="status-badge">System Live</div>
+            
+            <div class="controls-wrapper" style="display: flex; align-items: center; gap: 10px;">
+                <button id="theme-toggle" class="search-btn" style="padding: 8px 12px; background: rgba(255,255,255,0.05); color: var(--text-high); border: 1px solid var(--card-border);">
+                    <i class="fa-solid fa-moon"></i>
+                </button>
+                <button id="lang-toggle" class="search-btn" style="padding: 8px 14px; background: rgba(255,255,255,0.05); color: var(--text-high); border: 1px solid var(--card-border); font-size: 0.85rem;">
+                    <i class="fa-solid fa-globe"></i> <span id="lang-text">العربية</span>
+                </button>
+                <div id="auth-section">
+                    <button id="login-btn" class="search-btn" style="padding: 8px 16px; background: rgba(255,255,255,0.05); color: var(--text-high); border: 1px solid var(--card-border);">
+                        <i class="fa-brands fa-github"></i> <span data-i18n="signIn">Sign In</span>
+                    </button>
+                </div>
+            </div>
         </header>
 
         <main>
             <form id="search-form" class="search-engine">
                 <div class="input-wrapper">
                     <i class="fa-solid fa-magnifying-glass"></i>
-                    <input type="text" id="search-input" placeholder="Enter GitHub username..." required autocomplete="off">
+                    <input type="text" id="search-input" placeholder="Enter GitHub username..." data-placeholder="placeholder" required autocomplete="off">
                 </div>
-                <button type="submit" class="search-btn">Fetch Data</button>
-                <div id="error-msg" class="search-error">Not found</div>
+                <button type="submit" class="search-btn" data-i18n="fetchData">Fetch Data</button>
+                <div id="error-msg" class="search-error" data-i18n="notFound">Not found</div>
             </form>
+
+            <div id="welcome-card" class="bento-card" style="text-align: center; padding: 4rem 2rem;">
+                <i class="fa-brands fa-github-alt" style="font-size: 3.5rem; color: var(--accent-blue); margin-bottom: 1.5rem; display: block;"></i>
+                <h2 data-i18n="welcomeTitle" style="font-size: 1.8rem; margin-bottom: 0.5rem;">Discover Developer Personas</h2>
+                <p data-i18n="welcomeSub" style="color: var(--text-mid); font-size: 1rem; max-width: 450px; margin: 0 auto;">Search for any GitHub developer to index their repositories, stats, and digital footprint instantly.</p>
+            </div>
 
             <div id="skeleton" class="bento-card hidden">
                 <div class="skel-top">
@@ -52,7 +72,12 @@
                     <div class="user-main">
                         <img id="avatar" src="" alt="Avatar" class="user-photo">
                         <div class="user-naming">
-                            <h2 id="name">Name</h2>
+                            <div style="display: flex; align-items: center; gap: 0.8rem;">
+                                <h2 id="name">Name</h2>
+                                <button id="bookmark-btn" style="background: none; border: none; cursor: pointer; font-size: 1.1rem;">
+                                    <i class="fa-regular fa-bookmark"></i>
+                                </button>
+                            </div>
                             <a href="#" id="username" class="handle" target="_blank">@username</a>
                         </div>
                     </div>
@@ -63,15 +88,15 @@
 
                 <div class="bento-grid">
                     <div class="bento-item">
-                        <span class="label">Repositories</span>
+                        <span class="label" data-i18n="repos">Repositories</span>
                         <span id="repos" class="value">0</span>
                     </div>
                     <div class="bento-item">
-                        <span class="label">Followers</span>
+                        <span class="label" data-i18n="followers">Followers</span>
                         <span id="followers" class="value">0</span>
                     </div>
                     <div class="bento-item">
-                        <span class="label">Following</span>
+                        <span class="label" data-i18n="following">Following</span>
                         <span id="following" class="value">0</span>
                     </div>
                 </div>
@@ -83,21 +108,28 @@
                     <div class="link-cell" id="company-box"><i class="fa-solid fa-briefcase"></i> <span id="company">-</span></div>
                 </div>
             </div>
+
+            <div id="favorites-section" class="hidden" style="margin-top: 3rem;">
+                <h3 style="font-size: 1.1rem; margin-bottom: 1.2rem; color: var(--text-mid); letter-spacing: 0.5px;">
+                    <i class="fa-solid fa-bookmark" style="color: var(--accent-blue); margin-right: 8px;"></i> <span data-i18n="savedDevs">Saved Developers</span>
+                </h3>
+                <div id="favorites-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1rem;"></div>
+            </div>
         </main>
 
         <footer class="pro-footer">
             <div class="footer-content">
                 <div class="creator-info">
-                    <span class="badge">Verified Architect</span>
-                    <p>Engineered with Precision by <strong>Amr Othman</strong></p>
+                    <span class="badge" data-i18n="verified">Verified Architect</span>
+                    <p data-i18n="creatorText">Engineered with Precision by <strong>Amr Othman</strong></p>
                 </div>
                 <div class="action-links">
                     <a href="https://wa.me/201009694831" class="wa-contact" target="_blank">
-                        <i class="fa-brands fa-whatsapp"></i> Hire the Expert
+                        <i class="fa-brands fa-whatsapp"></i> <span data-i18n="hire">Hire the Expert</span>
                     </a>
                 </div>
             </div>
-            <div class="copyright">© 2024 Developer Ecosystem. All rights reserved.</div>
+            <div class="copyright">© 2026 OTHMAN VENTURES </div>
         </footer>
     </div>
 

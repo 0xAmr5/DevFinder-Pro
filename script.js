@@ -54,7 +54,7 @@ themeToggle.addEventListener('click', () => {
     themeToggle.innerHTML = newTheme === 'dark' ? '<i class="fa-solid fa-moon"></i>' : '<i class="fa-solid fa-sun"></i>';
 });
 
-// Fetch Data From GitHub
+// Fetch Data From GitHub API
 async function fetchDevData(username) {
     welcomeCard.classList.add('hidden');
     profileCard.classList.add('hidden');

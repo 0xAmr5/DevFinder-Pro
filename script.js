@@ -2,16 +2,16 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebas
 import { getAuth, signInWithPopup, GithubAuthProvider, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 import { getFirestore, collection, addDoc, query, where, getDocs, deleteDoc, doc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
-// ⚠️ ضع مفاتيح Firebase الخاصة بمشروعك هنا
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-    apiKey: "YOUR_API_KEY",
-    authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-    projectId: "YOUR_PROJECT_ID",
-    storageBucket: "YOUR_PROJECT_ID.appspot.com",
-    messagingSenderId: "YOUR_SENDER_ID",
-    appId: "YOUR_APP_ID"
+  apiKey: "AIzaSyDZzxdphX6-UTvSl555dJ4ax0TgigqxYqM",
+  authDomain: "devfinder-pro.firebaseapp.com",
+  projectId: "devfinder-pro",
+  storageBucket: "devfinder-pro.firebasestorage.app",
+  messagingSenderId: "240657595064",
+  appId: "1:240657595064:web:b7f0f52d67d7612033524d",
+  measurementId: "G-6GQF4X29TX"
 };
-
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
